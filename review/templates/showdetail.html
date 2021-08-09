@@ -1,0 +1,60 @@
+{% load crispy_forms_tags %}
+<div>
+    <div>
+        <img src="{{showDetail.poster}}">
+    </div>
+
+    <div>
+        <p>{{showDetail.prfnm}}</p>
+        <p>{{showDetail.genrenm}}</p>
+        <p>{{showDetail.prfstate}}</p>
+        <p>{{showDetail.prfpdfrom}}</p>
+        <p>{{showDetail.prfpdto}}</p>
+        <p>{{showDetail.fcltynm}}</p>
+        <p>{{showDetail.prfcast}}</p>
+        <p>{{showDetail.prfcrew}}</p>
+        <p>{{showDetail.prfruntime}}</p>
+        <p>{{showDetail.prfage}}</p>
+        <p>{{showDetail.entrpsnm}}</p>
+        <p>{{showDetail.pcseguidance}}</p>
+        <p>{{showDetail.dtguidance}}</p>
+        <p>{{showDetail.sty}}</p>
+    </div>
+<hr>
+    <div>
+        <form action="{%url 'review:new' showDetail.mt20id %}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{newForm | crispy }}
+            <input type="hidden" name="prfnm" value="{{showDetail.prfnm}}">
+            <br>
+            <button type="submit"> submit </button>
+        </form>
+    </div>
+    <hr>
+
+    <div>
+        {%for review in reviews %}
+            <table>
+                <tr>
+                    <td>{{review.author}}</td>
+                </tr>
+                <tr>
+                    <td>관람일시</td>
+                    <td class="view_date">{{review.view_date | date:"Y-m-d"}}</td>
+                    <td class="view_time">{{review.view_time}}</td>
+                </tr>
+                <tr>
+                    <td>배우</td>
+                    <td>{{review.cast1}}</td>
+                </tr>
+                <tr>
+                    <td>만족도</td>
+                    <td>{{review.rating}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">{{review.body}}</td>
+                </tr>
+            </table>
+        {%endfor%}
+    </div>
+</div>

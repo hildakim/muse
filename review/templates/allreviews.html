@@ -1,0 +1,31 @@
+<div>
+    <form action="" method="">
+        
+    </form>
+</div>
+
+<div>
+    {%for review in reviewAll %}
+        <table>
+            <tr>
+                <td>{{review.author}}</td>
+            </tr>
+            <tr>
+                <td>관람일시</td>
+                <td class="view_date">{{review.view_date | date:"Y-m-d"}}</td>
+                <td class="view_time">{{review.view_time}}</td>
+            </tr>
+            <tr>
+                <td>배우</td>
+                <td>{{review.cast1}}</td>
+            </tr>
+            <tr>
+                <td>만족도</td>
+                <td>{{review.rating}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{review.body}}</td>
+            </tr>
+        </table>
+    {%endfor%}
+</div>
