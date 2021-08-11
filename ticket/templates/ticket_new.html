@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <Style>
+
+    </Style>
+</head>
+
+<body>
+    <h1>Write!</h1>
+    <form id="write_form" action="{%url 'ticket_new'%}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="body">
+            <h2>{{form.as_p}}</h2>
+        </div>
+        <div class="button">
+            <button id="submit_btn" type="submit">submit</button>
+        </div>
+    </form>
+</body>
+{% endblock %}
