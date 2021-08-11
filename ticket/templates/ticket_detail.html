@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <Style>
+
+    </Style>
+</head>
+
+<body>
+
+    <h1>{{data.ticket}}</h1>
+    
+    <div class="body">
+        <div id="data"> by. {{data.writer}}<br><br>
+            {{data.contents | linebreaks}}
+        </div>
+        
+        {% if ticket.image %}
+        <p><img src="{{ticket.image.url}}" alt="" width="60%" height=""></p>
+        {% endif %}
+    
+    </div>
+    <div id="info">
+       {{data.date}}
+    </div>
+
+    <div class="etc">
+        <a href="{% url 'ticket_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
+        <a href="{% url 'ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>
+    </div>
+  
+</body>
+{% endblock %}
