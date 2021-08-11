@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
@@ -9,7 +10,7 @@ from imagekit.processors import ResizeToFill
 class Review(models.Model):
   mt20id = models.CharField(max_length=10)
   title = models.CharField(max_length=50)
-  author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewers')
+  author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='reviewers')
   rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
   upload_date = models.DateTimeField()
   view_date = models.DateField()
