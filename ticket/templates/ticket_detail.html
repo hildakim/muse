@@ -16,8 +16,8 @@
             {{data.contents | linebreaks}}
         </div>
         
-        {% if ticket.image %}
-        <p><img src="{{ticket.image.url}}" alt="" width="60%" height=""></p>
+        {% if data.image %}
+            <p><img src="{{data.image.url}}" alt="" width="60%" height=""></p>
         {% endif %}
     
     </div>

@@ -10,21 +10,23 @@
 <body>
     <div class="container">
         <h1>티켓양도</h1>
-        <a href="{%url 'ticket:ticket_new' %}" id="go_new">WRITE</a>
+        <a href="{% url 'ticket:ticket_new' %}" id="go_new">WRITE</a>
 
         <div class="body">
             {% for content in posts %}
             <div class="content">
                 <h2>{{content.ticket}}</h2>
-                {% if ticket.image %}
-                <p class = "image"><img src="{{ticket.image_thumbnail.url}}" height="200" width="400"></p>
+                
+                {% if content.image %}
+                    <p class = "image"><img src="{{content.image_thumbnail.url}}" height="200" width="400"></p>
                 {% endif %}
+                
                 <div class="sub">
                     <b>{{content.ticket}}</b><br>
                     by. {{content.writer}}<br>
                     <br>{{content.summary | linebreaks}}
 
-                    <a id="more" href="{%url 'ticket:ticket_detail' content.id %}"> 자세히보기</a>
+                    <a id="more" href="{% url 'ticket:ticket_detail' content.id %}"> 자세히보기</a>
                 </div>
             </div>
             {% endfor %}
