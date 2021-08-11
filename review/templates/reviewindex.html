@@ -1,0 +1,44 @@
+<style>
+    table, tr, td {
+        border: 1px solid black;
+    }
+    img {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+<div class="showList-wrapper">
+    {% for show in showList %}
+    
+        <table>
+            <tr>
+                <td rowspan="4"><img src="{{show.poster}}"></td>
+                <td><a href="{%url 'review:detail' show.mt20id %}">{{show.prfstate}}</a></td>
+            </tr>
+            <tr>
+                <td><a>{{show.prfnm}}</a></td>
+            </tr>
+            <tr>
+                <td>{{show.genrenm}}</td>
+            </tr>
+            <tr>
+                <td>{{show.prfpdfrom}}~{{show.prfpdto}}</td>
+            </tr>
+        </table>
+    
+    {%endfor%}
+
+    
+    <a href="?page=1" class="a-button">처음</a>
+    <a href="?page={{page|add:'-1'}}">&#9194;</a>
+
+    <!-- 현재 페이지 -->
+    <span>{{page}}</span>
+    
+    <a href="?page={{page|add:'1'}}">&#9193;</a>
+
+</div>
+<div>
+    <a href="{%url 'review:allreviews'%}">후기 모아보기</a>
+</div>
