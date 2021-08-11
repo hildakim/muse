@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 class Message(models.Model):
-    sender = models.CharField(max_length=100)
-    receiver = models.CharField(max_length=100)
+    sender = models.ForeignKey(get_user_model(), on_delete = models.CASCADE, related_name = "sender", default = "")
+    receiver = models.ForeignKey(get_user_model(), on_delete = models.CASCADE, related_name = "receiver", default = "")
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField()
     body = models.TextField()
