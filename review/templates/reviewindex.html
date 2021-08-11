@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <style>
     table, tr, td {
         border: 1px solid black;
@@ -42,3 +44,4 @@
 <div>
     <a href="{%url 'review:allreviews'%}">후기 모아보기</a>
 </div>
+{%endblock%}
