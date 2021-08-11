@@ -1,6 +1,10 @@
+{% load crispy_forms_tags %}
+
 <div>
-    <form action="" method="">
-        
+    <form action="{%url 'review:allreviews'%}" method="POST">
+        {%csrf_token%}
+        {{sortForm | crispy}}
+        <button type="submit"> submit </button>
     </form>
 </div>
 

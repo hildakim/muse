@@ -5,10 +5,6 @@ from django.forms.fields import DateField, DateTimeField, ImageField, IntegerFie
 from django.forms.widgets import DateTimeInput, NumberInput, Textarea
 from .models import Review
 
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         fields = ['rating', 'view_date', 'view_time', 'cast1', 'cast2', 'body', 'image']
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -46,3 +42,13 @@ class NewReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'view_date','view_time', 'cast1', 'cast2', 'body', 'image']
+
+class SortReviewForm(Form):
+    # DATE_CHOICES = (
+    #     tuple((i.view_date, i.view_date) for i in Review.objects.all()),
+    # )
+    # view_date = CharField(max_length=2, choices=DATE_CHOICES)
+    # view_day = ChoiceField(choices=DATE_CHOICES)
+
+    view_date = forms.ModelChoiceField(queryset=Review.objects.values('view_date'))
+    # title = forms.ModelChoiceField(queryset=Review.objects.values('title'))
