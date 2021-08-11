@@ -95,8 +95,7 @@ def new(request, mt20id):
     if form.is_valid():
       new_review = form.save(commit=False)
       new_review.upload_date = timezone.now()
-      # new_review.author = request.user
-      new_review.author = User.objects.get(username='hilda')
+      new_review.author = request.user
       new_review.mt20id = mt20id
       new_review.title = title
       new_review.save()
