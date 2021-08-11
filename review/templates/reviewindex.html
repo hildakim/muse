@@ -29,7 +29,15 @@
     
     {%endfor%}
 
-        <!-- 페이지 만들어라!!!!!!!!!!!!!!!!!!!! 소팅이랑... -->
+    
+    <a href="?page=1" class="a-button">처음</a>
+    <a href="?page={{page|add:'-1'}}">&#9194;</a>
+
+    <!-- 현재 페이지 -->
+    <span>{{page}}</span>
+    
+    <a href="?page={{page|add:'1'}}">&#9193;</a>
+
 </div>
 <div>
     <a href="{%url 'review:allreviews'%}">후기 모아보기</a>
