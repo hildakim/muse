@@ -27,8 +27,8 @@
         <td>{{ user.birth |date:'Y년 m월 d일'}}</td>
     </tr>
 </table>
-<a href="{% url 'profile_update' %}">회원정보 수정</a>
-<a href="{% url 'profile_delete' %}">회원탈퇴</a>
+<a href="{% url 'user:profile_update' %}">회원정보 수정</a>
+<a href="{% url 'user:profile_delete' %}">회원탈퇴</a>
 
 {% else%}
 로그인을 하세요.<br>

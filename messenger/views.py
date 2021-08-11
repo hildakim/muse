@@ -25,7 +25,7 @@ def new_m(request):
             chat = chatform.save(commit = False)
             chat.pub_date = timezone.now()
             chat.save()
-        return redirect('detail_m', chat.id)
+        return redirect('messenger:detail_m', chat.id)
     else:
         chatform = MessageForm()
         return render(request, 'm_new.html', {'chatform':chatform})
@@ -33,4 +33,4 @@ def new_m(request):
 def delete_m(request, id):
     delete_message = Message.objects.get(id = id)
     delete_message.delete()
-    return redirect('received_m')
+    return redirect('messenger:received_m')

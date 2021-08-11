@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1>티켓양도</h1>
-        <a href="{%url 'ticket_new' %}" id="go_new">WRITE</a>
+        <a href="{%url 'ticket:ticket_new' %}" id="go_new">WRITE</a>
 
         <div class="body">
             {% for content in posts %}
@@ -24,7 +24,7 @@
                     by. {{content.writer}}<br>
                     <br>{{content.summary | linebreaks}}
 
-                    <a id="more" href="{%url 'ticket_detail' content.id %}"> 자세히보기</a>
+                    <a id="more" href="{%url 'ticket:ticket_detail' content.id %}"> 자세히보기</a>
                 </div>
             </div>
             {% endfor %}

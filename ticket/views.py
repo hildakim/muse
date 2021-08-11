@@ -26,7 +26,7 @@ def new(request):
             ticket = ticket_form.save(commit=False)
             ticket.date = timezone.now() #날짜 생성
             ticket.save()
-            return redirect('ticket')
+            return redirect('ticket:ticket')
     else:
         ticket_form = TicketForm()
         return render(request, 'ticket_new.html', {'form':ticket_form})
@@ -42,9 +42,9 @@ def edit(request, id):
             ticket = ticket_form.save(commit=False)
             ticket.date = timezone.now() 
             ticket.save()
-        return redirect('ticket_detail', ticket.id)
+        return redirect('ticket:ticket_detail', ticket.id)
 
 def delete(request, id):
     erase_ticket = Ticket.objects.get(id = id)
     erase_ticket.delete()
-    return redirect('ticket')
+    return redirect('ticket:ticket')

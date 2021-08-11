@@ -26,8 +26,8 @@
     </div>
 
     <div class="etc">
-        <a href="{% url 'ticket_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
-        <a href="{% url 'ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>
+        <a href="{% url 'ticket:ticket_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
+        <a href="{% url 'ticket:ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>
     </div>
   
 </body>

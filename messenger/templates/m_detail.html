@@ -9,6 +9,6 @@
 </div>
 <hr>
 <p>{{chat.body}}</p>
-<a href="{%url 'new_m'%}">답장하기</a>
-<a href="{% url 'delete_m' chat.id %}">삭제하기</a>
+<a href="{%url 'messenger:new_m'%}">답장하기</a>
+<a href="{% url 'messenger:delete_m' chat.id %}">삭제하기</a>
 {% endblock %}

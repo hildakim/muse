@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ticket.apps.TicketConfig',
     'messenger.apps.MessengerConfig',
     'user.apps.UserConfig',
+    'crispy_forms',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -132,9 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -168,3 +169,7 @@ MEDIA_URL = '/media/'
 #crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+#date,time input format
+DATETIME_INPUT_FORMATS = ['%Y-%m-%d %H:%M']
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
+TIME_INPUT_FORMATS = ['%H:%M']
