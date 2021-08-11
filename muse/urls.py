@@ -24,4 +24,6 @@ urlpatterns = [
     path('review/', include('review.urls')),
     path('ticket/', include('ticket.urls')),
     path('messenger/', include('messenger.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('user/', include('user.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
