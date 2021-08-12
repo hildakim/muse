@@ -28,10 +28,12 @@
     {% if request.user == data.author %}
     <div class="etc">
         <a href="{% url 'ticket:ticket_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
-        <a href="{% url 'ticket:ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>
-        
+        <a href="{% url 'ticket:ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>  
     </div>
     {% endif %}
-  
+    
+    <hr> 
+     {% comment %} 티켓 양도 댓글을 위한 공간... {% endcomment %}
+
 </body>
 {% endblock %}
