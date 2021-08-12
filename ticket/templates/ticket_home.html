@@ -3,51 +3,65 @@
 
 <head>
     <Style>
-
+        .footer {
+            position: static;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            color: white;
+            background: #F1EB73;
+        }
+        h2,h5,p,small{
+            color: black;
+        }
+        .card-deck {
+            background: #F1EB73;
+        }
     </Style>
 </head>
 
-<body>
+    <h1>티켓양도</h1>
+    <a href="{% url 'ticket:ticket_new' %}" id="go_new">새 티켓 양도 글</a>
+    
     <div class="container">
-        <h1>티켓양도</h1>
-        <a href="{% url 'ticket:ticket_new' %}" id="go_new">WRITE</a>
-
-        <div class="body">
+        <div class="card-deck mb-3 text-center"> 
             {% for content in posts %}
-            <div class="content">
+            <div class="card mb-3 shadow-sm">   
+            <div class="card-header">
                 <h2>{{content.ticket}}</h2>
-                
+            </div>    
+            
+            <div class="card-body">
                 {% if content.image %}
                     <p class = "image"><img src="{{content.image_thumbnail.url}}" height="200" width="400"></p>
                 {% endif %}
                 
-                <div class="sub">
-                    <b>{{content.ticket}}</b><br>
-                    by. {{content.writer}}<br>
-                    <br>{{content.summary | linebreaks}}
+                
+                <h5 class="card-title"><b>{{content.ticket}}</b></h5>
+                <br>
+                <small class="card-title">by. {{content.writer}}</small><br>
+                <p class="card-text"></p>{{content.summary | linebreaks}}</p>
 
-                    <a id="more" href="{% url 'ticket:ticket_detail' content.id %}"> 자세히보기</a>
-                </div>
+                <a href="{% url 'ticket:ticket_detail' content.id %}" id="more">자세히보기</a>
             </div>
             {% endfor %}
-
-            <div class="footer">
-                {% if posts.has_previous %}
-                <a href="?page=1">1</a>
-                <a href="?page={{posts.previous_page_number}}">◀</a>
-                {% endif %}
-
-                <span>{{posts.number}}</span>
-                <span>of</span>
-                <span>{{posts.paginator.num_pages}}</span>
-
-                {%if posts.has_next%}
-                <a href="?page={{posts.next_page_number}}">▶</a>
-                <a href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a>
-                {% endif %}
-            </div>
-
         </div>
     </div>
-</body>
+
+    <div class="footer">
+        {% if posts.has_previous %}
+            <a href="?page=1">1</a>
+            <a href="?page={{posts.previous_page_number}}">◀</a>
+        {% endif %}
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+        {%if posts.has_next%}
+            <a href="?page={{posts.next_page_number}}">▶</a>
+            <a href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a>
+        {% endif %}
+    </div>
+
 {% endblock %}
