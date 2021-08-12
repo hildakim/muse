@@ -41,30 +41,20 @@
             <a class="nav-link" href="{% url 'ticket:ticket' %}">티켓 양도</a>
           </li>
           {% endif %}
-          {% comment %} {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'messenger:new_m' %}">Send Message</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'messenger:received_m' %}">My Message</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'messenger:send_m' %}">My Send Message</a>
-          </li>
-          {% endif %} {% endcomment %}
+
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              message
+              Message
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'messenger:new_m' %}">Send Message</a></li>
+              <li><a class="dropdown-item" href="{% url 'messenger:received_m' %}">My Message</a></li>
               <li><a class="dropdown-item" href="{% url 'messenger:send_m' %}">My Send Message</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'messenger:received_m' %}">My Message</a></li>
+              <li><a class="dropdown-item" href="{% url 'messenger:new_m' %}">Send Message</a></li>
             </ul>
           </li>
           {% endif %}
