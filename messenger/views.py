@@ -36,7 +36,7 @@ def delete_m(request, id):
     return redirect('messenger:received_m')
 
 def search(request):
-    chats = Chat.objects.all().order_by('-id')
+    chats = Message.objects.all().order_by('-id')
     q = request.POST.get('q', "") 
 
     if q:
