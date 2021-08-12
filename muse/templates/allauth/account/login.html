@@ -7,40 +7,65 @@
 
 {% block content %}
 
-<h1>{% trans "로그인" %}</h1>
+<h3>{% trans "로그인" %}</h3>
 
-{% get_providers as socialaccount_providers %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<style>
+.btn-social-login {
+  transition: all .2s;
+  outline: 0;
+  border: 1px solid transparent;
+  padding: .5rem !important;
+  border-radius: 50%;
+  color: #fff;
+}
+.btn-social-login:focus {
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+.text-dark { color: #343a40!important; }
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}기존 타사 계정 중 하나로 로그인하세요.<br>
-   또는, <a href="{{ signup_url }}">회원가입</a>
- {{ site_name }} 계정에 가입하고 아래에서 로그인하세요:{% endblocktrans %}</p>
+.social {
+  font-size: small;
+}
 
-<div class="socialaccount_ballot">
+a { 
+  text-decoration: none; 
+} 
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+.login {
+  text-align: center;
+  margin: auto;
+}
+ 
+</style>
 
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
+{% load static %}
+{% load socialaccount %} 
+{% providers_media_js %} 
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% load static %}
+  {% load crispy_forms_tags %}
+  {{ form | crispy }} 
+  <button class="primaryAction" type="submit">{% trans "로그인" %}</button>
+  <br><br>
+  <span class="social">- 소셜 로그인으로 간편하게 로그인하세요! -</span>
+  <br><br>
+  <a href="{% provider_login_url 'google' %}"> 
+    <img src="{% static 'google.png' %}" alt="구글로그인" height="45"> 
+  </a> 
+  <a href="{% provider_login_url 'naver' %}"> 
+    <img src="{% static 'naver.png' %}" alt="네이버로그인" height="45"> 
+  </a> 
+  <a href="{% provider_login_url 'kakao' %}"> 
+    <img src="{% static 'kakao.png' %}" alt="카카오로그인" height="45"> 
+  </a>
+  <br><br>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "비밀번호 찾기" %}</a><br><br>
-  <button class="primaryAction" type="submit">{% trans "회원가입" %}</button>
+  
 </form>
 
 {% endblock %}

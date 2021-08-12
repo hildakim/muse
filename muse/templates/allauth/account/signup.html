@@ -5,16 +5,23 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "회원가입" %}</h1>
+<h3>{% trans "회원가입" %}</h3>
 
-<p>{% blocktrans %}계정이 이미 있다면? <a href="{{ login_url }}">로그인</a>.{% endblocktrans %}</p>
+<style>
+  .signup {
+  text-align: center;
+  margin: auto;
+}
+</style>
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% load static %}
+  {% load crispy_forms_tags %}
+  {{ form | crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
+  {% endif %}<br>
   <button type="submit">{% trans "회원가입" %} </button>
 </form>
 

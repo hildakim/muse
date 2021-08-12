@@ -3,9 +3,13 @@ from django.contrib.auth.forms import UserChangeForm
 from django import forms
 from .models import CustomUser
 
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class CustomSignupForm(SignupForm):
     nickname = forms.CharField(label='닉네임', widget=forms.TextInput(attrs={'placeholder': '익명의사자'}))
-    birth = forms.DateField(label='생년월일', widget=forms.DateInput(attrs={'placeholder': '1900-01-01'}))
+    birth = forms.DateField(label='생년월일', widget=DateInput())
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
@@ -17,9 +21,10 @@ class CustomSignupForm(SignupForm):
 class CustomCsUserChangeForm(UserChangeForm):
     password = None        
     username = forms.CharField(label='아이디', widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    email = forms.EmailField(label='이메일')
     nickname = forms.CharField(label='닉네임')
-    birth = forms.DateField(label='생년월일')
+    birth = forms.DateField(label='생년월일', widget=DateInput())
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'nickname', 'birth']
+        fields = ['username', 'email', 'nickname', 'birth']
