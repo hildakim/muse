@@ -86,7 +86,7 @@ def showListApi(page):
   # eddate = request.GET.get('eddate').replace("-", "")
 
   # params = '&rows=5'+'&stdate='+stdate+'&eddate='+eddate+'&cpage='+cpage 
-  params = '&stdate=20200601&eddate=20210830&rows=5&cpage='+page
+  params = '&stdate=20180101&eddate=20210830&shcate=AAAB&rows=6&cpage='+page
   xmlUrl = 'http://www.kopis.or.kr/openApi/restful/pblprfr?service='+open_api_key+params
 
   response = requests.get(xmlUrl)
@@ -230,7 +230,7 @@ def showSearchApi(title, page):
   # eddate = request.GET.get('eddate').replace("-", "")
 
   # params = '&rows=5'+'&stdate='+stdate+'&eddate='+eddate+'&cpage='+cpage 
-  params = '&stdate=20200601&eddate=20210830&rows=5&cpage='+page+"&shprfnm="+title
+  params = '&stdate=20180101&eddate=20210830&rows=6&shcate=AAAB&cpage='+page+"&shprfnm="+title
   xmlUrl = 'http://www.kopis.or.kr/openApi/restful/pblprfr?service='+open_api_key+params
 
   response = requests.get(xmlUrl)

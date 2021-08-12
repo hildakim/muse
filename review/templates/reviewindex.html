@@ -1,17 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-    table, tr, td {
+    /* table, tr, td, div, a {
         border: 1px solid black;
+    } */
+    tr, td {
+        padding: 5px;
     }
-    .show-table {
-        height: 50%; 
-        background-color: rgb(231, 255, 95);
+    .search_form input{
+        width: 500px;
+    }
+    .search_form {
+        padding: 20px;
+    }
+    .show-table { 
+        display: inline-block;
+        width: 45%;
+        text-align: left;
+        background-color: white;
         color: black;
+        margin: 10px;
+        padding: 10px;
+    }
+    .show-table_box {
+        /* border: #F1EB73 2px solid; */
+        background-color: #F1EB73;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 50%;
+        margin: 0 auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     .show-table a {
         text-decoration: none;
-        background-color: rgb(231, 255, 95);
         color: black;
     }
     .show-table a:hover{
@@ -21,61 +44,86 @@
         height: 150px;
         width: 100px;
     }
-    .showList-wrapper {
-        margin: 0 auto;
-        text-align: center;
-    }
     .allreview-box a{
         color: black;
-        background-color: rgb(231, 255, 95);
+        background-color: #F1EB73;
         padding: 5px;
         margin: 10px;
+        text-decoration:none;
+    }
+    .allreview-box a:hover{
+        text-decoration: underline;
+    }
+    .direction {
+        background-color:#F1EB73;
+    }
+    .direction a, span{
+        text-decoration: none;
+        color:black;
+    }
+    .direction a:hover{
+        background-color: white;
+    }
+    .showname {
+        color: black;
+    }
+    .showstate {
+        background-color:rgb(174, 226, 243);
+        color: rgb(29, 126, 216);
+        width: fit-content;
+        padding: 2px;
+    }
+    .gray_text{
+        color: gray;
     }
 </style>
 
-<div>
+<div class="search_form">
     <form action="{%url 'review:search' %}" method="GET">
-        <!-- {%csrf_token%} -->
         <input type="search" name="title" placeholder="찾고싶은 뮤지컬/연극의 제목을 입력하세요">
         <button type="submit">검색</button>
     </form>
 </div>
 
 <div class="showList-wrapper">
+    <div class="show-table_box">
     {% for show in showList %}
-    
         <table class="show-table">
             <tr>
                 <td rowspan="4"><img src="{{show.poster}}"></td>
-                <td>{{show.prfstate}}</td>
+                <td><span class="showstate">{{show.prfstate}}</span></td>
             </tr>
             <tr>
-                <td><a href="{%url 'review:detail' show.mt20id %}">{{show.prfnm}}</a></td>
+                <td><a href="{%url 'review:detail' show.mt20id %}" class="showname">{{show.prfnm}}</a></td>
             </tr>
             <tr>
-                <td>{{show.genrenm}}</td>
+                <td class="gray_text">{{show.genrenm}}</td>
             </tr>
             <tr>
-                <td>{{show.prfpdfrom}}~{{show.prfpdto}}</td>
+                <td class="gray_text">{{show.prfpdfrom}}~{{show.prfpdto}}</td>
             </tr>
         </table>
-    
     {%endfor%}
+    </div>
 
-    
-    <a href="?page=1&title={{title}}" class="a-button">처음</a>
-    {% if page != '1' %}
-    <a href="?page={{page|add:'-1'}}&title={{title}}">&#9194;</a>
-    {% endif %}
-    <!-- 현재 페이지 -->
-    <span>{{page}}</span>
-    
-    <a href="?page={{page|add:'1'}}&title={{title}}">&#9193;</a>
+    <div class="direction">
+        <a href="?page=1&title={{title}}" class="a-button">처음</a>
+        {% if page != '1' %}
+        <a href="?page={{page|add:'-1'}}&title={{title}}">◀</a>
+        {% endif %}
 
+        <!-- 현재 페이지 -->
+        <span>{{page}}</span>
+        
+        <a href="?page={{page|add:'1'}}&title={{title}}">▶</a>
+    </div>
 </div>
+
+<br>
 
 <div class="allreview-box">
-    <a href="{%url 'review:allreviews'%}">후기 모아보기</a>
+    <a href="{%url 'review:allreviews'%}" id="id_allreview">후기 모아보기</a>
 </div>
-
+<br>
+<br>
 {%endblock%}

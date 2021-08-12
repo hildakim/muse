@@ -1,77 +1,218 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load crispy_forms_tags %}
+<style>
+    /* table, tr, td, div, a {
+        border: 1px solid black;
+    } */
+    .form-group {
+        display: inline-block;
+    }
+    #div_id_body, #div_id_image{
+        display: block;
+    }
+    .review-table {
+        display: inline-block;
+        width: 80%;
+        text-align: left;
+        background-color: white;
+        color: black;
+        margin: 5 auto;
+        padding: 10px;
+    }
+    .gray-text {
+        color: gray;
+    }
+    .blue-text {
+        color:dodgerblue;
+    }
+    .div_showDetail{
+        background-color: white;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .poster{
+        display: inline-block;
+        padding: 20px;
+    }
+    .detail-box{
+        display: inline-block;
+        text-align: left;
+        padding: 20px;
+        color: rgb(161, 161, 161);
+    }
+    .showname {
+        background-color: #F1EB73;
+        width: fit-content;
+        padding: 2px;
+        color: black;
+    }
+    .genrename {
+        background-color:rgb(253, 198, 206);
+        color: rgb(224, 77, 126);
+        width: fit-content;
+        padding: 2px;
+    }
+    .showstate {
+        background-color:rgb(174, 226, 243);
+        color: rgb(29, 126, 216);
+        width: fit-content;
+        padding: 2px;
+    }
+    td {
+        min-width: 70px;
+    }
+    .yellow-button {
+        background-color: #F1EB73;
+        /* border: #F1EB73 5px solid ; */
+        padding: 5px;
+    }
+    .textarea {
+        height: 100px;
+    }
+    #write_review_form {
+        display: none;
+    }
+    #btn_write:hover{
+        color:#F1EB73;
+    }
+</style>
+<script type="text/javascript">
+function doDisplay(){
+    var con = document.getElementById('write_review_form');
+    var btn = document.getElementById('btn_write')
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+        btn.innerHTML = '▲접기▲'
+    }else{
+        con.style.display = 'none';
+        btn.innerHTML = '▼후기 쓰기▼'
+    }
+}
+</script>
+<br>
 <div>
-    <div>
-        <img src="{{showDetail.poster}}">
-    </div>
+    <div class="div_showDetail">
+        <div class="poster">
+            <img src="{{showDetail.poster}}">
+        </div>
 
-    <div>
-        <p>{{showDetail.prfnm}}</p>
-        <p>{{showDetail.genrenm}}</p>
-        <p>{{showDetail.prfstate}}</p>
-        <p>{{showDetail.prfpdfrom}}</p>
-        <p>{{showDetail.prfpdto}}</p>
-        <p>{{showDetail.fcltynm}}</p>
-        <p>{{showDetail.prfcast}}</p>
-        <p>{{showDetail.prfcrew}}</p>
-        <p>{{showDetail.prfruntime}}</p>
-        <p>{{showDetail.prfage}}</p>
-        <p>{{showDetail.entrpsnm}}</p>
-        <p>{{showDetail.pcseguidance}}</p>
-        <p>{{showDetail.dtguidance}}</p>
-        <p>{{showDetail.sty}}</p>
+        <div class="detail-box">
+            <table>
+                <tr>
+                    <td colspan="2"><span class="genrename">{{showDetail.genrenm}}</span>
+                        <span class="showstate">{{showDetail.prfstate}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="showname">{{showDetail.prfnm}}</span></td>
+                </tr>
+                <tr>
+                    <td>공연 기간</td>
+                    <td>{{showDetail.prfpdfrom}}~{{showDetail.prfpdto}}</td>
+                </tr>
+                <tr>
+                    <td>공연 시설</td>
+                    <td>{{showDetail.fcltynm}}</td>
+                </tr>
+                <tr>
+                    <td>출연진</td>
+                    <td>{{showDetail.prfcast}}</td>
+                </tr>
+                <tr>
+                    <td>제작진</td>
+                    <td>{{showDetail.prfcrew}}</td>
+                </tr>
+                <tr>
+                    <td>런타임</td>
+                    <td>{{showDetail.prfruntime}}</td>
+                </tr>
+                <tr>
+                    <td>연령 제한</td>
+                    <td>{{showDetail.prfage}}</td>
+                </tr>
+                <tr>
+                    <td>제작사</td>
+                    <td>{{showDetail.entrpsnm}}</td>
+                </tr>
+                <tr>
+                    <td>가격</td>
+                    <td>{{showDetail.pcseguidance}}</td>
+                </tr>
+                <tr>
+                    <td>공연시간</td>
+                    <td>{{showDetail.dtguidance}}</td>
+                </tr>
+                <tr>
+                    <td>줄거리</td>
+                    <td>{{showDetail.sty}}</td>
+                </tr>
+            </table>
+
+        </div>
     </div>
 <hr>
-{% if user.is_authenticated %}
-    <div>
-        <form action="{%url 'review:new' showDetail.mt20id %}" method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-            {{newForm | crispy }}
-            <input type="hidden" name="prfnm" value="{{showDetail.prfnm}}">
-            <br>
-            <button type="submit"> submit </button>
-        </form>
-    </div>
-{%else%}
-    <div><p>후기는 로그인 후에 입력할 수 있습니다</p></div>
-{%endif%}
-    <hr>
 
+<div>
+    <span onclick="doDisplay()" id="btn_write">▼후기 쓰기▼</span>
+</div>
+
+<div id="write_review_form">
+    {% if user.is_authenticated %}
+        <div>
+            <form action="{%url 'review:new' showDetail.mt20id %}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{newForm | crispy }}
+                <input type="hidden" name="prfnm" value="{{showDetail.prfnm}}">
+                <br>
+                <button type="submit"> submit </button>
+            </form>
+        </div>
+    {%else%}
+        <div><br><span>후기는 로그인 후에 입력할 수 있습니다</span><br></div>
+    {%endif%}
+</div>
+
+
+    <hr>
     <div>
         <form action="" method="POST">
             {%csrf_token%}
             {{sortForm|crispy}}
-            <button type="submit">조건 검색</button>
-            <button type="reset">초기화</button>
+            <button type="submit" class="yellow-button">조건 검색</button>
+            <button type="reset" class="yellow-button">초기화</button>
         </form>
-        
     </div>
-
+    <br>
     
-    <div>
+    <div class="review-wrapper">
         {%for review in reviews %}
-            <table>
+            <table class="review-table">
                 <tr>
-                    <td colspan="3">{{review.author}}</td>
-                    <td rowspan="4">{{review.body}}</td>
+                    <td style="text-align: center;width:50px;">&#128100;</td>
+                    <td style="width:80px;">{{review.author}}</td>
                 </tr>
                 <tr>
-                    <td>관람일시</td>
-                    <td class="view_date">{{review.view_date | date:"Y-m-d"}}</td>
-                    <td class="view_time">{{review.view_time}}</td>
+                    <td></td>
+                    <td class="blue-text">만족도&nbsp;</td>
+                    <td class="gray-text">{{review.rating}}점</td>
                 </tr>
                 <tr>
-                    <td>배우</td>
-                    <td>{{review.cast1}}, {{review.cast2}}</td>
+                    <td></td>
+                    <td class="blue-text">관람일시</td>
+                    <td class="gray-text">{{review.view_date | date:"Y-m-d"}}&nbsp;{{review.view_time}}</td>
                 </tr>
                 <tr>
-                    <td>만족도</td>
-                    <td>{{review.rating}}</td>
+                    <td></td>
+                    <td class="blue-text">배우</td>
+                    <td class="gray-text">{{review.cast1}}&nbsp;{{review.cast2}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="3">{{review.body}}
                 </tr>
             </table>
         {%empty%}
-            <p>검색 결과가 없습니다.</p>
+            <br><span>검색 결과가 없습니다.</span><br>
         {%endfor%}
     </div>
 </div>

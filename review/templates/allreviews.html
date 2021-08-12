@@ -2,42 +2,84 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<div>
-    <!-- <form action="{%url 'review:allreviews'%}" method="POST">
-        {%csrf_token%}
-        {{sortForm | crispy}}
-        <button type="submit"> submit </button>
-    </form> -->
+<style>
+    .form-group {
+        display: inline-block;
+    }
+    /* table, tr, td, div, a {
+        border: 1px solid black;
+    } */
+    .review-table {
+        display: inline-block;
+        width: 80%;
+        text-align: left;
+        background-color: white;
+        color: black;
+        margin: 5 auto;
+        padding: 10px;
+    }
+    .yellow-button {
+        background-color: #F1EB73;
+        /* border: #F1EB73 5px solid ; */
+        padding: 5px;
+    }
+    .gray-text {
+        color: gray;
+    }
+    .blue-text {
+        color:dodgerblue;
+    }
+    .div_form {
+        padding: 20px;
+    }
+    .div_allreview {
+        padding: 20px;
+    }
+    
+</style>
+
+<div class="div_form">
     <form action="" method="POST">
         {%csrf_token%}
         {{allSortForm | crispy}}
-        <button type="reset">초기화</button>
-        <button type="submit">검색</button>
+        <button type="reset" class="yellow-button">초기화</button>
+        <button type="submit" class="yellow-button">검색</button>
     </form>
 </div>
 
-<div>
+<div class="div_allreview">
     {%for review in reviewAll %}
-        <table>
-            <tr>
-                <td>{{review.author}}</td>
-                <td colspan="2">{{review.title}}</td>
-                <td rowspan="4">{{review.body}}</td>
-            </tr>
-            <tr>
-                <td>관람일시</td>
-                <td class="view_date">{{review.view_date | date:"Y-m-d"}}</td>
-                <td class="view_time">{{review.view_time}}</td>
-            </tr>
-            <tr>
-                <td>배우</td>
-                <td>{{review.cast1}}, {{review.cast2}}</td>
-            </tr>
-            <tr>
-                <td>만족도</td>
-                <td>{{review.rating}}</td>
-            </tr>
-        </table>
+    <table class="review-table">
+        <tr>
+            <td style="text-align: center;width:50px;">&#127915;</td>
+            <td colspan="2">{{review.title}}</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;width:50px;">&#128100;</td>
+            <td style="width:80px;">{{review.author}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="blue-text">만족도&nbsp;</td>
+            <td class="gray-text">{{review.rating}}점</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="blue-text">관람일시</td>
+            <td class="gray-text">{{review.view_date | date:"Y-m-d"}}&nbsp;{{review.view_time}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="blue-text">배우</td>
+            <td class="gray-text">{{review.cast1}}&nbsp;{{review.cast2}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="3">{{review.body}}
+        </tr>
+    </table>
+    {%empty%}
+        <br><span>검색 결과가 없습니다.</span><br>
     {%endfor%}
 </div>
 {%endblock%}
