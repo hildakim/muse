@@ -10,7 +10,7 @@
             width: 100%;
             padding: 15px 0;
             text-align: center;
-            color: white;
+            color: black;
             background: #F1EB73;
         }
         h2,h5,p,small{
@@ -19,11 +19,24 @@
         .card-deck {
             background: #F1EB73;
         }
+        .allreview-box a{
+            color: black;
+            background-color: #F1EB73;
+            padding: 5px;
+            margin: 10px;
+            text-decoration:none;
+        }
+        .allreview-box a:hover{
+            text-decoration: underline;
+        }
     </Style>
 </head>
 
-    <h1>티켓양도</h1>
-    <a href="{% url 'ticket:ticket_new' %}" id="go_new">새 티켓 양도 글</a>
+    <h1>티켓 양도</h1>
+    
+    <div class="allreview-box">
+    <a href="{% url 'ticket:ticket_new' %}" id="go_new">티켓 양도 새로 글쓰기</a>
+    </div>
     
     <div class="container">
         <div class="card-deck mb-3 text-center"> 
@@ -44,7 +57,10 @@
                 <small class="card-title">by. {{content.writer}}</small><br>
                 <p class="card-text"></p>{{content.summary | linebreaks}}</p>
 
+                <div class="allreview-box">
                 <a href="{% url 'ticket:ticket_detail' content.id %}" id="more">자세히보기</a>
+                </div>
+
             </div>
             {% endfor %}
         </div>
