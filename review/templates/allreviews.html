@@ -3,10 +3,16 @@
 {% load crispy_forms_tags %}
 
 <div>
-    <form action="{%url 'review:allreviews'%}" method="POST">
+    <!-- <form action="{%url 'review:allreviews'%}" method="POST">
         {%csrf_token%}
         {{sortForm | crispy}}
         <button type="submit"> submit </button>
+    </form> -->
+    <form action="" method="POST">
+        {%csrf_token%}
+        {{allSortForm | crispy}}
+        <button type="reset">초기화</button>
+        <button type="submit">검색</button>
     </form>
 </div>
 
@@ -15,6 +21,8 @@
         <table>
             <tr>
                 <td>{{review.author}}</td>
+                <td colspan="2">{{review.title}}</td>
+                <td rowspan="4">{{review.body}}</td>
             </tr>
             <tr>
                 <td>관람일시</td>
@@ -23,14 +31,11 @@
             </tr>
             <tr>
                 <td>배우</td>
-                <td>{{review.cast1}}</td>
+                <td>{{review.cast1}}, {{review.cast2}}</td>
             </tr>
             <tr>
                 <td>만족도</td>
                 <td>{{review.rating}}</td>
-            </tr>
-            <tr>
-                <td colspan="3">{{review.body}}</td>
             </tr>
         </table>
     {%endfor%}

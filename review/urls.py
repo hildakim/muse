@@ -9,4 +9,5 @@ urlpatterns = [
     path('new/<str:mt20id>', new, name='new'),
     path('allreviews', allReviews, name="allreviews"),
     path('', index, name='index'),
+    path('search/', showSearch, name="search"),
 ]

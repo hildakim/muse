@@ -23,6 +23,7 @@
         <p>{{showDetail.sty}}</p>
     </div>
 <hr>
+{% if user.is_authenticated %}
     <div>
         <form action="{%url 'review:new' showDetail.mt20id %}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
@@ -32,13 +33,28 @@
             <button type="submit"> submit </button>
         </form>
     </div>
+{%else%}
+    <div><p>후기는 로그인 후에 입력할 수 있습니다</p></div>
+{%endif%}
     <hr>
 
+    <div>
+        <form action="" method="POST">
+            {%csrf_token%}
+            {{sortForm|crispy}}
+            <button type="submit">조건 검색</button>
+            <button type="reset">초기화</button>
+        </form>
+        
+    </div>
+
+    
     <div>
         {%for review in reviews %}
             <table>
                 <tr>
-                    <td>{{review.author}}</td>
+                    <td colspan="3">{{review.author}}</td>
+                    <td rowspan="4">{{review.body}}</td>
                 </tr>
                 <tr>
                     <td>관람일시</td>
@@ -47,16 +63,15 @@
                 </tr>
                 <tr>
                     <td>배우</td>
-                    <td>{{review.cast1}}</td>
+                    <td>{{review.cast1}}, {{review.cast2}}</td>
                 </tr>
                 <tr>
                     <td>만족도</td>
                     <td>{{review.rating}}</td>
                 </tr>
-                <tr>
-                    <td colspan="3">{{review.body}}</td>
-                </tr>
             </table>
+        {%empty%}
+            <p>검색 결과가 없습니다.</p>
         {%endfor%}
     </div>
 </div>

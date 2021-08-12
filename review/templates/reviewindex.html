@@ -10,16 +10,24 @@
     }
 </style>
 
+<div>
+    <form action="{%url 'review:search' %}" method="GET">
+        <!-- {%csrf_token%} -->
+        <input type="search" name="title" placeholder="찾고싶은 뮤지컬/연극의 제목을 입력하세요">
+        <button type="submit">검색</button>
+    </form>
+</div>
+
 <div class="showList-wrapper">
     {% for show in showList %}
     
         <table>
             <tr>
                 <td rowspan="4"><img src="{{show.poster}}"></td>
-                <td><a href="{%url 'review:detail' show.mt20id %}">{{show.prfstate}}</a></td>
+                <td>{{show.prfstate}}</td>
             </tr>
             <tr>
-                <td><a>{{show.prfnm}}</a></td>
+                <td><a href="{%url 'review:detail' show.mt20id %}">{{show.prfnm}}</a></td>
             </tr>
             <tr>
                 <td>{{show.genrenm}}</td>
@@ -32,13 +40,13 @@
     {%endfor%}
 
     
-    <a href="?page=1" class="a-button">처음</a>
-    <a href="?page={{page|add:'-1'}}">&#9194;</a>
+    <a href="?page=1&title={{title}}" class="a-button">처음</a>
+    <a href="?page={{page|add:'-1'}}&title={{title}}">&#9194;</a>
 
     <!-- 현재 페이지 -->
     <span>{{page}}</span>
     
-    <a href="?page={{page|add:'1'}}">&#9193;</a>
+    <a href="?page={{page|add:'1'}}&title={{title}}">&#9193;</a>
 
 </div>
 <div>
