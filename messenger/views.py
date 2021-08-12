@@ -34,3 +34,13 @@ def delete_m(request, id):
     delete_message = Message.objects.get(id = id)
     delete_message.delete()
     return redirect('messenger:received_m')
+
+def search(request):
+    chats = Chat.objects.all().order_by('-id')
+    q = request.POST.get('q', "") 
+
+    if q:
+        chats = chats.filter(title__icontains=q)
+        return render(request, 'search.html', {'chats' : chats, 'q' : q})
+    else:
+        return render(request, 'search.html')

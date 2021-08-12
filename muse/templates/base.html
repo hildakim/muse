@@ -1,3 +1,6 @@
+{% load imagekit %}
+{% load socialaccount %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +39,17 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'new_m' %}">Send Message</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'received_m' %}">My Message</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'send_m' %}">My Send Message</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>
@@ -54,10 +68,11 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="post">
+          {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
       </div>
     </div>
   </nav>
