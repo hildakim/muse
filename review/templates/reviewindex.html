@@ -7,7 +7,7 @@
     tr, td {
         padding: 5px;
     }
-    .search_form input{
+    #id_search_title{
         width: 500px;
     }
     .search_form {
@@ -76,11 +76,17 @@
     .gray_text{
         color: gray;
     }
+    #id_start_date, #id_end_date {
+        width: 150px;
+        margin: 10px;
+    }
 </style>
 
 <div class="search_form">
     <form action="{%url 'review:search' %}" method="GET">
-        <input type="search" name="title" placeholder="찾고싶은 뮤지컬/연극의 제목을 입력하세요">
+        <!-- <label for="id_start_date">검색 범위&nbsp;</label><input type="date" name="start_date" id="id_start_date"> -->
+        <!-- ~<input type="date" name="end_date" id="id_end_date"> -->
+        <input type="search" name="title" placeholder="찾고싶은 뮤지컬의 제목을 입력하세요" id="id_search_title">
         <button type="submit">검색</button>
     </form>
 </div>
