@@ -2,9 +2,8 @@
 
 {% block content %}
     {% if not chats %}
-
+        <br>
         <h1>No search results found.</h1>
-
     {% else %}
 
         {% for chat in chats.all %}
