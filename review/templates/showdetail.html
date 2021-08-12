@@ -185,6 +185,7 @@ function doDisplay(){
     <br>
     
     <div class="review-wrapper">
+        <p>평균 만족도 {{ratingAvg |default:'0'}} 점</p>
         {%for review in reviews %}
             <table class="review-table">
                 <tr>

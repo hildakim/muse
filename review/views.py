@@ -55,6 +55,7 @@ def detail(request, id):
   showDetail = showDetailApi(mt20id)
   newForm = NewReviewForm()
   sortForm = ReviewSortForm()
+  ratingAvg = ratingAverage(id)
   if request.method == 'POST': 
     sortForm = ReviewSortForm(request.POST)
     if sortForm.is_valid():
@@ -76,7 +77,7 @@ def detail(request, id):
         reviews = reviews & Review.objects.filter(view_time = view_time)
   else:
     reviews = Review.objects.filter(mt20id=mt20id)
-  return render(request, 'showdetail.html', {'showDetail':showDetail, 'newForm':newForm, 'reviews':reviews, 'sortForm':sortForm})
+  return render(request, 'showdetail.html', {'showDetail':showDetail, 'newForm':newForm, 'reviews':reviews, 'sortForm':sortForm, 'ratingAvg':ratingAvg})
 
 
 def showListApi(page):
@@ -258,3 +259,18 @@ def showSearchApi(title, page):
               'genrenm' : item.find('genrenm').get_text()}
       showList.append(show)
   return showList
+
+
+def ratingAverage(mt20id):
+  rating_qs = Review.objects.filter(mt20id=mt20id).values('rating')
+  sum = 0
+  for i in rating_qs:
+    sum += i.get('rating')
+
+  if sum != 0:
+    avg = sum / rating_qs.count()
+    avg = round(avg, 2)
+  else:
+    avg = 0
+  print(sum,rating_qs.count(),avg)
+  return avg

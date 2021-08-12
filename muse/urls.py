@@ -18,8 +18,10 @@ from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
+from review.views import index
 
 urlpatterns = [
+    path('', index, name="index"),
     path('admin/', admin.site.urls),
     path('review/', include('review.urls')),
     path('ticket/', include('ticket.urls')),
