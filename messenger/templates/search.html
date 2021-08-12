@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not chats %}
+
+        <h1>No search results found.</h1>
+
+    {% else %}
+
+        {% for chat in chats.all %}
+        <div class="container">
+            <div class="card">
+                <div class="card text-white bg-success">
+                    <h1>{{ chat.title }}</h1>
+                    <p>{{ chat.pub_date | date:"Y-m-d" }}</p>
+                    <p>{{ chat.summary }}<a href="{% url 'messenger:detail_m' chat.id %}"> ...더 보기</a></p> 
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
