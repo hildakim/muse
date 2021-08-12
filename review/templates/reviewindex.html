@@ -4,9 +4,32 @@
     table, tr, td {
         border: 1px solid black;
     }
+    .show-table {
+        height: 50%; 
+        background-color: rgb(231, 255, 95);
+        color: black;
+    }
+    .show-table a {
+        text-decoration: none;
+        background-color: rgb(231, 255, 95);
+        color: black;
+    }
+    .show-table a:hover{
+        text-decoration: underline;
+    }
     img {
-        height: 100px;
+        height: 150px;
         width: 100px;
+    }
+    .showList-wrapper {
+        margin: 0 auto;
+        text-align: center;
+    }
+    .allreview-box a{
+        color: black;
+        background-color: rgb(231, 255, 95);
+        padding: 5px;
+        margin: 10px;
     }
 </style>
 
@@ -21,7 +44,7 @@
 <div class="showList-wrapper">
     {% for show in showList %}
     
-        <table>
+        <table class="show-table">
             <tr>
                 <td rowspan="4"><img src="{{show.poster}}"></td>
                 <td>{{show.prfstate}}</td>
@@ -41,15 +64,18 @@
 
     
     <a href="?page=1&title={{title}}" class="a-button">처음</a>
+    {% if page != '1' %}
     <a href="?page={{page|add:'-1'}}&title={{title}}">&#9194;</a>
-
+    {% endif %}
     <!-- 현재 페이지 -->
     <span>{{page}}</span>
     
     <a href="?page={{page|add:'1'}}&title={{title}}">&#9193;</a>
 
 </div>
-<div>
+
+<div class="allreview-box">
     <a href="{%url 'review:allreviews'%}">후기 모아보기</a>
 </div>
+
 {%endblock%}
