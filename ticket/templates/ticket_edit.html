@@ -7,8 +7,8 @@
     </Style>
 </head>
 
+{% if request.user == ticket.author %}
 <h1>Update!</h1>
-
 <form method="POST" id="update_form" enctype="multipart/form-data">
     {%csrf_token%}
     <h2>{{edit_ticket.as_p}}</h2>   
@@ -16,4 +16,7 @@
         <button id="submit_btn" type="submit">submit</button>
     </div>
 </form>
+{% else %}
+<h3>이 경로로 들어오다니 나쁜 사람.. <br>당신은 글쓴이가 아닙니다. 나가세요.</h3>
+{% endif %}
 {% endblock %}

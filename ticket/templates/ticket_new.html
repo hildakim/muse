@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    {% if user.is_authenticated %}
     <h1>Write!</h1>
     <form id="write_form" action="{% url 'ticket:ticket_new' %}" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
@@ -18,5 +19,10 @@
             <button id="submit_btn" type="submit">submit</button>
         </div>
     </form>
+    {% else %}
+    <h4>로그인 후 이용하세요<br>
+    <a href="{% url 'account_login' %}">로그인</a>
+    </h4>
+    {% endif %}
 </body>
 {% endblock %}

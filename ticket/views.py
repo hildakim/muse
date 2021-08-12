@@ -25,6 +25,7 @@ def new(request):
         if ticket_form.is_valid():
             ticket = ticket_form.save(commit=False)
             ticket.date = timezone.now() #날짜 생성
+            ticket.author = request.user
             ticket.save()
             return redirect('ticket:ticket')
     else:
@@ -32,6 +33,25 @@ def new(request):
         return render(request, 'ticket_new.html', {'form':ticket_form})
 
 def edit(request, id):
+    post = get_object_or_404(Ticket, pk = id)
+    if request.method == 'GET':
+        ticket_form = TicketForm(instance = post)
+        return render(request, 'ticket_edit.html', {'edit_ticket' : ticket_form, 'ticket' : post})
+    else:
+        ticket_form = TicketForm(request.POST, request.FILES, instance = post)
+        if ticket_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.date = timezone.now() 
+            ticket.save()
+        return redirect('ticket:ticket_detail', ticket.id)
+
+def delete(request, id):
+    erase_ticket = Ticket.objects.get(id = id)
+    if request.user == erase_ticket.author:
+        erase_ticket.delete()
+    return redirect('ticket:ticket')
+
+def messenger(request, id):
     post = get_object_or_404(Ticket, pk = id)
     if request.method == 'GET':
         ticket_form = TicketForm(instance = post)
@@ -43,8 +63,3 @@ def edit(request, id):
             ticket.date = timezone.now() 
             ticket.save()
         return redirect('ticket:ticket_detail', ticket.id)
-
-def delete(request, id):
-    erase_ticket = Ticket.objects.get(id = id)
-    erase_ticket.delete()
-    return redirect('ticket:ticket')
