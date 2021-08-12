@@ -35,8 +35,15 @@ a {
 .login {
   text-align: center;
   margin: auto;
+  width: 20%;
 }
- 
+
+@media screen and (max-width: 768px) { 
+  .login { 
+    width: 70%; 
+  } 
+}
+
 </style>
 
 {% load static %}
@@ -48,7 +55,7 @@ a {
   {% load static %}
   {% load crispy_forms_tags %}
   {{ form | crispy }} 
-  <button class="primaryAction" type="submit">{% trans "로그인" %}</button>
+  <button type="submit">{% trans "로그인" %}</button>
   <br><br>
   <span class="social">- 소셜 로그인으로 간편하게 로그인하세요! -</span>
   <br><br>
