@@ -10,4 +10,5 @@ urlpatterns = [
     path('allreviews', allReviews, name="allreviews"),
     path('', index, name='index'),
     path('search/', showSearch, name="search"),
+    path('delete/<str:id>/<str:mt20id>', delete, name="delete"),
 ]

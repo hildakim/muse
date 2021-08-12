@@ -152,6 +152,13 @@ def new(request, mt20id):
       return redirect('review:detail', mt20id)
     return redirect('review:index')
 
+
+def delete(request, mt20id, id):
+  if request.method == 'GET':
+    delete_review = Review.objects.get(id = id)
+    delete_review.delete()
+    return redirect('review:detail', mt20id)
+
 # def allReviews(request):
 #   if request.method == 'POST': 
 #     sortForm = SortReviewForm(request.POST)

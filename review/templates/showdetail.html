@@ -210,10 +210,17 @@ function doDisplay(){
                     <td></td>
                     <td colspan="3">{{review.body}}
                 </tr>
+                {% if user.is_authenticated and review.author == user%}
+                <tr>
+                    <td></td>
+                    <td><a href="{%url 'review:delete' mt20id=showDetail.mt20id id=review.id  %}">삭제</a></td>
+                </tr>
+                {%endif%}
             </table>
         {%empty%}
             <br><span>검색 결과가 없습니다.</span><br>
         {%endfor%}
     </div>
 </div>
+<br>
 {%endblock%}
