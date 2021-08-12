@@ -3,32 +3,60 @@
 
 <head>
     <Style>
-        
+        body {
+            font-family: 'Alfa Slab One', 'Do Hyeon';
+            color: white;
+            font-size: 20px;
+        }
+        hr {
+            color: black;
+            border: 30px;
+        }
+        #data {
+            border-radius: 15px;
+            background-color: #F1EB73;
+            color: rgb(48, 48, 48);
+        }
+        .etc {
+            color: rgb(187, 187, 187);
+        }
+        .allreview-box a{
+            color: black;
+            background-color: #F1EB73;
+            padding: 5px;
+            margin: 10px;
+            text-decoration:none;
+        }
+        .allreview-box a:hover{
+            text-decoration: underline;
+        }
     </Style>
 </head>
 
 <body>
 
     <h1>{{data.ticket}}</h1>
+
+    <div id="info">
+       {{data.date}}
+    </div>
     
     <div class="body">
         <div id="data"> by. {{data.writer}}<br><br>
             {{data.contents | linebreaks}}
-        </div>
-        
+          
         {% if data.image %}
             <p><img src="{{data.image.url}}" alt="" width="60%" height=""></p>
         {% endif %}
-    
-    </div>
-    <div id="info">
-       {{data.date}}
+        </div>  
     </div>
 
     {% if request.user == data.author %}
     <div class="etc">
+        <div class="allreview-box">
         <a href="{% url 'ticket:ticket_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
-        <a href="{% url 'ticket:ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a>  
+        <a href="{% url 'ticket:ticket_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a> 
+        </div> 
     </div>
     {% endif %}
     
