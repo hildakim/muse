@@ -12,7 +12,7 @@
         display: block;
     }
     .review-table {
-        display: inline-block;
+        display: block;
         width: 80%;
         text-align: left;
         background-color: white;
@@ -30,16 +30,22 @@
         background-color: white;
         display: flex;
         justify-content: flex-start;
+        flex-shrink: 2;
     }
     .poster{
-        display: inline-block;
+        display:block;
         padding: 20px;
+    }
+    .poster img{
+        max-width: 100%;
     }
     .detail-box{
         display: inline-block;
         text-align: left;
         padding: 20px;
         color: rgb(161, 161, 161);
+        word-break:break-all;
+        word-wrap:break-word;
     }
     .showname {
         background-color: #F1EB73;
@@ -81,6 +87,13 @@
     }
     #id_click_photo:hover{
         text-decoration: underline;
+    }
+    @media screen and (max-width: 768px) { 
+        .div_showDetail{
+            background-color: white;
+            display: block;
+            justify-content: flex-start;
+        }
     }
 </style>
 <script type="text/javascript">
