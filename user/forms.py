@@ -21,7 +21,7 @@ class CustomSignupForm(SignupForm):
 class CustomCsUserChangeForm(UserChangeForm):
     password = None        
     username = forms.CharField(label='아이디', widget=forms.TextInput(attrs={'readonly':'readonly'}))
-    email = forms.EmailField(label='이메일')
+    email = forms.EmailField(label='이메일', required=False)
     nickname = forms.CharField(label='닉네임')
     birth = forms.DateField(label='생년월일', widget=DateInput())
 

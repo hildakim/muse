@@ -92,10 +92,10 @@
         </ul>
         </span>
         
-        <form class="d-flex" action="{% url 'messenger:search' %}" method="post">
+        <form class="d-flex" action="{% url 'ticket:search' %}" method="post">
           {% csrf_token %}
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
-        <button class="btn btn-outline-success" type="submit">Message Search</button>
+        <button class="btn btn-outline-success" type="submit">Ticket Search</button>
       </form>
       </div>
     </div>

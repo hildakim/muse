@@ -16,5 +16,6 @@ class Ticket(models.Model):
   
     def __str__(self):
         return self.ticket    
+    
     def summary(self):
         return self.contents[:100]

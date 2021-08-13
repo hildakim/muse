@@ -6,7 +6,6 @@
         body {
             font-family: 'Alfa Slab One', 'Do Hyeon';
             color: white;
-            font-size: 20px;
         }
         hr {
             color: black;
@@ -42,7 +41,7 @@
     </div>
     
     <div class="body">
-        <div id="data"> by. {{data.writer}}<br><br>
+        <div id="data"> by. {{data.author}}<br><br>
             {{data.contents | linebreaks}}
           
         {% if data.image %}

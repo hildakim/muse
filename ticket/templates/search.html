@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <Style>
+        .allreview-box a{
+            color: black;
+            background-color: #F1EB73;
+            padding: 5px;
+            margin: 10px;
+            text-decoration:none;
+        }
+        .allreview-box a:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+    {% if not tickets %}
+        <br>
+        <h1>No search results found.</h1>
+    {% else %}
+
+        {% for data in tickets.all %}
+        <div class="container">
+            <div class="card">
+                <div class="card text-white bg-success">
+                    <h1>{{ data.ticket }}</h1>
+                    <p>{{ data.date | date:"Y-m-d" }}</p>
+                    <p>{{ data.summary }}
+                    <br>
+                    <div class="allreview-box">
+                        <a href="{% url 'ticket:ticket_detail' data.id %}"> ...더 보기</a></p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
