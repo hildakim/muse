@@ -15,11 +15,11 @@ class Review(models.Model):
   upload_date = models.DateTimeField()
   view_date = models.DateField()
   view_time = models.TimeField()
-  cast1 = models.CharField(max_length=10)
+  cast1 = models.CharField(max_length=10, blank=True, null=True)
   cast2 = models.CharField(max_length=10, blank=True, null=True)
   body = models.TextField()
   image = models.ImageField(upload_to='review/%Y/%m/%d/', null=True, blank=True)
-  image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 100)])
+  image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(200, 200)])
 
   def __str__(self):
     return self.mt20id

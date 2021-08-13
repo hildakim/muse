@@ -76,6 +76,12 @@
     #btn_write:hover{
         color:#F1EB73;
     }
+    #id_photo_review {
+        display: none;
+    }
+    #id_click_photo:hover{
+        text-decoration: underline;
+    }
 </style>
 <script type="text/javascript">
 function doDisplay(){
@@ -87,6 +93,17 @@ function doDisplay(){
     }else{
         con.style.display = 'none';
         btn.innerHTML = '▼후기 쓰기▼'
+    }
+}
+function displayPhoto(){
+    var con = document.getElementById('id_photo_review');
+    var btn = document.getElementById('id_click_photo')
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+        btn.innerHTML = '사진 접기'
+    }else{
+        con.style.display = 'none';
+        btn.innerHTML = '사진 보기&#128070;'
     }
 }
 </script>
@@ -211,6 +228,15 @@ function doDisplay(){
                     <td></td>
                     <td colspan="3">{{review.body}}
                 </tr>
+                {% if review.image %}
+                <tr>
+                    <td></td>
+                    <td>
+                        <span onclick="displayPhoto()" id="id_click_photo">사진 보기&#128070;</span>
+                        <img id="id_photo_review" src="{{review.image_thumbnail.url}}">
+                    </td>
+                </tr>
+                {%endif%}
                 {% if user.is_authenticated and review.author == user%}
                 <tr>
                     <td></td>
