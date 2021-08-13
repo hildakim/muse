@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.db.models import Q
 from .models import Ticket
 from .forms import TicketForm
 
@@ -63,3 +64,13 @@ def messenger(request, id):
             ticket.date = timezone.now() 
             ticket.save()
         return redirect('ticket:ticket_detail', ticket.id)
+
+def search(request):
+    tickets = Ticket.objects.all().order_by('-id')
+    q = request.POST.get('q', "") 
+
+    if q:
+        tickets = tickets.filter(ticket__icontains=q)
+        return render(request, 'search.html', {'tickets' : tickets, 'q' : q})
+    else:
+        return render(request, 'search.html')
