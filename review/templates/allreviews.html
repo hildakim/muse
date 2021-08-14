@@ -1,42 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load crispy_forms_tags %}
-
-<style>
-    .form-group {
-        display: inline-block;
-    }
-    /* table, tr, td, div, a {
-        border: 1px solid black;
-    } */
-    .review-table {
-        display: inline-block;
-        width: 80%;
-        text-align: left;
-        background-color: white;
-        color: black;
-        margin: 5 auto;
-        padding: 10px;
-    }
-    .yellow-button {
-        background-color: #F1EB73;
-        /* border: #F1EB73 5px solid ; */
-        padding: 5px;
-    }
-    .gray-text {
-        color: gray;
-    }
-    .blue-text {
-        color:dodgerblue;
-    }
-    .div_form {
-        padding: 20px;
-    }
-    .div_allreview {
-        padding: 20px;
-    }
-    
-</style>
+<head>
+    <style>
+        .form-group {
+            display: inline-block;
+        }
+        /* table, tr, td, div, a {
+            border: 1px solid black;
+        } */
+        .review-table {
+            display: inline-block;
+            width: 80%;
+            text-align: left;
+            background-color: white;
+            color: black;
+            margin: 5 auto;
+            padding: 10px;
+        }
+        .yellow-button {
+            background-color: #F1EB73;
+            /* border: #F1EB73 5px solid ; */
+            padding: 5px;
+        }
+        .gray-text {
+            color: gray;
+        }
+        .blue-text {
+            color:dodgerblue;
+        }
+        .div_form {
+            padding: 20px;
+        }
+        .div_allreview {
+            padding: 20px;
+        }
+    </style>
+</head>
 
 <div class="div_form">
     <form action="" method="POST">

@@ -13,9 +13,9 @@ class Ticket(models.Model):
     contents = models.TextField()
     image = models.ImageField(upload_to='ticket/', blank=True, null=True)
     image_thumbnail = ImageSpecField(source = 'image', processors = [ResizeToFill(250, 230)])
-  
+
     def __str__(self):
         return self.ticket    
     
     def summary(self):
-        return self.contents[:100]
+        return self.contents[:30]

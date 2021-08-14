@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load crispy_forms_tags %}
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <Style>
         .body {
             text-align: center;
         }
-        input,
+        /* input,
         textarea {
             font-family: 'Do Hyeon', sans-serif;
             width: 50%;
@@ -25,20 +26,37 @@
             margin-top:30px;
             margin-right: 25%;
             
+        } */
+        .controls {
+            color: black;
+            overflow: hidden;
+        }
+        #id_contents, #id_ticket, #id_image {
+            background-color: #fffba8;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        #submit_btn{
+            width: 60px;
+            padding: 5px;
+            margin: 10px;
+        }
+        .controls a {
+            color: rgb(3, 0, 202);
         }
     </Style>
 </head>
 
 {% if request.user == ticket.author %}
-<h1>Update!</h1>
+<h1>글 수정</h1>
 <form method="POST" id="update_form" enctype="multipart/form-data">
     {%csrf_token%}
-    <h2>{{edit_ticket.as_p}}</h2>   
-    <div class="button">
-        <button id="submit_btn" type="submit">submit</button>
-    </div>
+    {{edit_ticket | crispy}}
+    <button id="submit_btn" type="submit">확인</button>
 </form>
 {% else %}
+
 <h3>이 경로로 들어오다니 나쁜 사람.. <br>당신은 글쓴이가 아닙니다. 나가세요.</h3>
 {% endif %}
 {% endblock %}

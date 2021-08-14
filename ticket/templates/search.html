@@ -2,6 +2,10 @@
 
 {% block content %}
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
     <Style>
         .allreview-box a{
             color: black;
@@ -13,14 +17,29 @@
         .allreview-box a:hover{
             text-decoration: underline;
         }
+        .ticket-table{
+            background-color: rgb(255, 255, 240);
+            margin: 20px;
+        }
+        .table a{
+            color: black;
+            text-decoration: none;
+        }
+        .table a:hover {
+            text-decoration: underline;
+        }
+        .green-active:hover{
+            background-color: rgba(198, 247, 183, 0.685);
+        }
     </style>
 </head>
+    <h1>검색 결과</h1>
     {% if not tickets %}
         <br>
-        <h1>No search results found.</h1>
+        <h1>검색 결과가 없습니다.</h1>
     {% else %}
 
-        {% for data in tickets.all %}
+        <!-- {% for data in tickets.all %}
         <div class="container">
             <div class="card">
                 <div class="card text-white bg-success">
@@ -35,7 +54,27 @@
             </div>
         </div>
         <br>
-        {% endfor %}
+        {% endfor %} -->
+
+
+        <div class="ticket-table">
+            <table class="table table-bordered">
+                <tr>
+                    <td>뮤지컬</td>
+                    <td>글 내용</td>
+                    <td>작성자</td>
+                    <td>작성일</td>
+                </tr>
+                {% for content in tickets %}
+                <tr class="green-active">
+                    <td>{{content.ticket}}</td>
+                    <td><a href="{% url 'ticket:ticket_detail' content.id %}">{{content.summary}}...</a></td>
+                    <td>{{content.author}}</td>
+                    <td>{{content.date | date:"Y-m-d"}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
     {% endif %}
 

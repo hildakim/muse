@@ -1,22 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load crispy_forms_tags %}
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <Style>
         .body {
             text-align: center;
-        }
-        input,
-        textarea {
-            font-family: 'Do Hyeon', sans-serif;
-            width: 50%;
-            border: none;
-            background-color: #F1EB73;
-            border-radius: 20px;
-            padding: 10px;
-            margin: 0px 50px;
-            font-size: 18px;
-            color: black;
         }
         h2{
             color:white;
@@ -24,24 +13,34 @@
             text-align: right;
             margin-top:30px;
             margin-right: 25%;
-            
+        }
+        .controls {
+            color: black;
+        }
+        #id_contents, #id_ticket, #id_image {
+            background-color: #fffba8;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        #submit_btn{
+            width: 60px;
+            padding: 5px;
+            margin: 10px;
         }
     </Style>
 </head>
 
 <body>
     {% if user.is_authenticated %}
-    <h1>Write!</h1>
+    <h1>글 작성</h1>
     <form id="write_form" action="{% url 'ticket:ticket_new' %}" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
-        <div class="body">
-            <h2>{{form.as_p}}</h2>
-        </div>
-        <div class="button">
-            <button id="submit_btn" type="submit">submit</button>
-        </div>
+        {{form | crispy}}
+        <button id="submit_btn" type="submit">확인</button>
     </form>
     {% else %}
+
     <h4>로그인 후 이용하세요<br>
     <a href="{% url 'account_login' %}">로그인</a>
     </h4>

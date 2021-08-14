@@ -2,6 +2,7 @@
 {% block content %}
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <Style>
         body {
             font-family: 'Alfa Slab One', 'Do Hyeon';
@@ -29,12 +30,42 @@
         .allreview-box a:hover{
             text-decoration: underline;
         }
+        .detail-box {
+            min-height: 300px;
+            background-color: rgb(255, 255, 240);
+            color: black;
+            text-align: left;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        #id_date{
+            float: right;
+        }
+        .ticket-div{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(113, 203, 255, 0.541);
+        }
     </Style>
 </head>
 
 <body>
 
-    <h1>{{data.ticket}}</h1>
+    <div class="detail-box">
+        <div>
+            <span>&#128100;&nbsp;작성자 : {{data.author}}</span>
+            <span id="id_date">{{data.date}}</span>
+        </div>
+        <div class="ticket-div"><span>&#127915;&nbsp;양도 티켓 : {{data.ticket}}</span></div>
+        <hr>
+        <p>{{data.contents | linebreaks}}</p>
+        {% if data.image %}
+            <p><img src="{{data.image.url}}" alt="" width="60%" height=""></p>
+        {% endif %}
+    </div>
+
+
+    <!-- <h1>{{data.ticket}}</h1>
 
     <div id="info">
        {{data.date}}
@@ -48,7 +79,7 @@
             <p><img src="{{data.image.url}}" alt="" width="60%" height=""></p>
         {% endif %}
         </div>  
-    </div>
+    </div> -->
 
     {% if request.user == data.author %}
     <div class="etc">
@@ -60,7 +91,7 @@
     {% endif %}
     
     <hr> 
-     {% comment %} 티켓 양도 댓글을 위한 공간... {% endcomment %}
+    {% comment %} 티켓 양도 댓글을 위한 공간... {% endcomment %}
 
 </body>
 {% endblock %}

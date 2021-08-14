@@ -70,7 +70,7 @@ def search(request):
     q = request.POST.get('q', "") 
 
     if q:
-        tickets = tickets.filter(ticket__icontains=q)
+        tickets = tickets.filter(ticket__icontains=q) | tickets.filter(contents__icontains=q)
         return render(request, 'search.html', {'tickets' : tickets, 'q' : q})
     else:
         return render(request, 'search.html')
