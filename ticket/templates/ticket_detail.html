@@ -57,6 +57,7 @@
             <span id="id_date">{{data.date}}</span>
         </div>
         <div class="ticket-div"><span>&#127915;&nbsp;양도 티켓 : {{data.ticket}}</span></div>
+        <a href="{%url 'messenger:new_static' data.author %}" class="btn-yellow">&#9993;&nbsp;{{data.author}}에게 쪽지보내기</a>
         <hr>
         <p>{{data.contents | linebreaks}}</p>
         {% if data.image %}
