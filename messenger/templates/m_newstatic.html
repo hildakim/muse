@@ -5,8 +5,9 @@
 <h1>새로운 메세지를 작성해보세요!</h1>
 <br>
 <br>
-<form action="{%url 'messenger:new_m'%}" method="POST" enctype="multipart/form-data">
+<form action="{%url 'messenger:new_static' receiver%}" method="POST" enctype="multipart/form-data">
     {%csrf_token%}
+    <p style="font-size: large;">receiver: {{receiver}}</p>
     {{chatform.as_p}}
     <br>
     <button type="submit">보내기</button>

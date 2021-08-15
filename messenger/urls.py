@@ -10,4 +10,5 @@ urlpatterns = [
     path('send_m/', send_m, name = "send_m"),
     path('received_m/', receive_m, name = "received_m"),
     path('delete_m/<str:id>', delete_m, name = "delete_m"),
+    path('new/<str:receiver>', new_static, name="new_static")
 ]

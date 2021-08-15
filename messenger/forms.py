@@ -4,4 +4,10 @@ from .models import Message
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['title','receiver','body']
+        fields = ['receiver','title','body']
+
+
+class StaticReceiverForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['title','body']

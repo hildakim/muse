@@ -1,6 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-<br>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <Style>
+        body {
+            font-family: 'Alfa Slab One', 'Do Hyeon';
+            color: white;
+        }
+        hr {
+            margin: 3px;
+        }
+        .allreview-box a{
+            color: black;
+            background-color: #F1EB73;
+            padding: 5px;
+            margin: 10px;
+            text-decoration:none;
+        }
+        .allreview-box a:hover{
+            text-decoration: underline;
+        }
+        .detail-box {
+            min-height: 300px;
+            background-color: rgb(237, 253, 220);
+            color: black;
+            text-align: left;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        #id_date{
+            text-align: right;
+        }
+        .title-div{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(136, 248, 8, 0.466);
+        }
+        .row-name {
+            width: 100px;
+        }
+        .btn-yellow {
+            background-color: #F1EB73;
+            color: black;
+            text-decoration: none;
+            padding: 5px;
+            margin:10px;
+        }
+    </Style>
+</head>
+<!-- <br>
 <h1>{{chat.title}}</h1>
 <div>
 보낸 사람: {{chat.sender}}
@@ -8,7 +56,37 @@
 날짜: {{chat.pub_date}}
 </div>
 <hr>
-<p>{{chat.body}}</p>
-<a href="{%url 'messenger:new_m'%}">답장하기</a>
-<a href="{% url 'messenger:delete_m' chat.id %}">삭제하기</a>
+<p><a href="{%url 'messenger:new_static' chat.sender %}">&#9992;보낸 사람에게 답장하기</a></p>
+<p>{{chat.body}}</p> -->
+
+
+
+<div class="detail-box">
+    <table style="width: 100%;">
+        <tr>
+            <td class="row-name">&#128238;&nbsp;보낸 사람 :</td>
+            <td>{{chat.sender}}</td>
+        </tr>
+        <tr>
+            <td class="row-name">&#128233;&nbsp;받은 사람 :</td>
+            <td>{{chat.receiver}}</td>
+        </tr>
+        <tr class="title-div">
+            <td class="row-name">&#128681;&nbsp;제목 :</td>
+            <td>{{chat.title}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="id_date">{{chat.pub_date}}</td>
+        </tr>
+    </table>
+    <hr>
+    <p>{{chat.body | linebreaks}}</p>
+</div>
+
+
+<div style="margin: 20px;"><a href="{%url 'messenger:new_static' chat.sender %}" class="btn-yellow">&#9992;보낸 사람에게 답장하기</a></div>
+<a href="{%url 'messenger:new_m'%}" class="btn-yellow">새 쪽지 보내기</a>
+<a href="{% url 'messenger:delete_m' chat.id %}" class="btn-yellow">삭제하기</a>
+
 {% endblock %}

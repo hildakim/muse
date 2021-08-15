@@ -1,9 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style>
+        .receive-box {
+            background-color: white;
+        }
+        .yellow-active:hover {
+            background-color: rgba(248, 223, 81, 0.541);
+        }
+        .yellow-active a {
+            text-decoration: none;
+        }
+        .yellow-active a:hover {
+            text-decoration: underline;
+        }
+        .yellow_tr {
+            background-color:rgba(248, 223, 81, 0.253);
+        }
+    </style>
+</head>
 <br>
 <h1>새로운 메세지를 확인해보세요!</h1>
 
-{% for chat in chats %}
+<div class="receive-box">
+    <table class="table table-condensed">
+        <tr class="yellow_tr">
+            <td>보낸 사람</td>
+            <td>제목</td>
+            <td>날짜</td>
+        </tr>
+        {% for chat in chats %}
+        <tr class="yellow-active">
+            <td>{{chat.sender}}</td>
+            <td><a href = "{%url 'messenger:detail_m' chat.id %}">{{chat.title}}</a></td>
+            <td>{{chat.pub_date}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- {% for chat in chats %}
 <div>
 <h3>{{chat.title}}</h3>
 {{chat.id}}
@@ -12,5 +53,5 @@
 <br>
 <br>
 </div>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}

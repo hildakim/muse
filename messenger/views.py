@@ -3,7 +3,8 @@ from django.core.mail import message
 from django.utils import timezone
 from .models import Message
 from .views import *
-from .forms import MessageForm
+from .forms import MessageForm, StaticReceiverForm
+from django.contrib.auth import get_user_model
 # Create your views here.
 
 def receive_m(request):
@@ -35,3 +36,17 @@ def delete_m(request, id):
     delete_message = Message.objects.get(id = id)
     delete_message.delete()
     return redirect('messenger:received_m')
+
+def new_static(request, receiver):
+    if request.method == 'POST':
+        chatform = StaticReceiverForm(request.POST, request.FILES)
+        if chatform.is_valid():
+            chat = chatform.save(commit = False)
+            chat.pub_date = timezone.now()
+            chat.receiver = get_user_model().objects.get(username=receiver)
+            chat.sender = request.user
+            chat.save()
+        return redirect('messenger:detail_m', chat.id)
+    else:
+        chatform = StaticReceiverForm()
+        return render(request, 'm_newstatic.html', {'chatform':chatform, 'receiver':receiver})
