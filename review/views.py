@@ -213,10 +213,16 @@ def allReviews(request):
       if view_time != ""and view_time is not None:
         view_time = datetime.time.strftime(view_time, '%H:%M')
         reviewAll = reviewAll & Review.objects.filter(view_time = view_time)
-    
+        
+      paginator = Paginator(reviewAll, 6)
+      page = request.GET.get('page')
+      posts = paginator.get_page(page)
   else:
     reviewAll = Review.objects.all()
-  return render(request, 'allreviews.html', {'reviewAll':reviewAll, 'allSortForm': allSortForm})
+    paginator = Paginator(reviewAll, 6)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+  return render(request, 'allreviews.html', {'reviewAll':reviewAll, 'allSortForm': allSortForm, 'posts':posts})
 
 def showSearch(request):
   page = request.GET.get('page')

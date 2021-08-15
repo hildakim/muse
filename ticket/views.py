@@ -9,7 +9,7 @@ from .forms import TicketForm
 
 def ticket(request):
     contents = Ticket.objects.all()
-    ticket_list = Ticket.objects.all()
+    ticket_list = Ticket.objects.all().order_by('-id')
     paginator = Paginator(ticket_list, 3)
     page = request.GET.get('page')
     posts = paginator.get_page(page)

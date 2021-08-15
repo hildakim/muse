@@ -29,13 +29,13 @@
 <div class="receive-box">
     <table class="table table-condensed">
         <tr class="yellow_tr">
-            <td>보낸 사람</td>
+            <td>받은 사람</td>
             <td>제목</td>
             <td>날짜</td>
         </tr>
         {% for chat in chats %}
         <tr class="yellow-active">
-            <td>{{chat.sender}}</td>
+            <td>{{chat.receiver}}</td>
             <td><a href = "{%url 'messenger:detail_m' chat.id %}">{{chat.title}}</a></td>
             <td>{{chat.pub_date}}</td>
         </tr>
